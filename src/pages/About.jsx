@@ -3,10 +3,22 @@
  * Story, NGO journey, and gallery section
  * WCAG 2.1 AA compliant
  */
-import { motion } from 'framer-motion';
-import { Heart, Users, Globe, Zap } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Heart, Users, Globe, Zap, X } from 'lucide-react';
+import SectionHeader from '../components/SectionHeader';
+import StatCard from '../components/StatCard';
+import Card from '../components/Card';
+import gallery1 from '../assets/gallery1.jpeg';
+import gallery2 from '../assets/gallery2.jpeg';
+import gallery3 from '../assets/gallery3.jpeg';
+import gallery4 from '../assets/gallery4.jpeg';
+import gallery5 from '../assets/gallery5.jpeg';
+import gallery6 from '../assets/gallery6.jpeg';
 
 export default function About() {
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -70,12 +82,11 @@ export default function About() {
           viewport={{ once: true, amount: 0.2 }}
           variants={containerVariants}
         >
-          <motion.h2
-            className="text-4xl md:text-5xl font-bold text-dark-bg mb-12"
-            variants={itemVariants}
-          >
-            Our Journey Begins
-          </motion.h2>
+          <SectionHeader
+            title="Our Journey Begins"
+            description="Let's See was born from a transformative experience. Our founders visited multiple NGOs dedicated to helping the blind and visually impaired, and what they witnessed changed their perspective forever."
+            align="left"
+          />
 
           <div className="space-y-8">
             <motion.article className="prose prose-lg max-w-none" variants={containerVariants}>
@@ -139,24 +150,14 @@ export default function About() {
               { icon: Users, number: '15+', label: 'Countries' },
               { icon: Globe, number: '10K+', label: 'Lives Changed' },
               { icon: Zap, number: '24/7', label: 'Support' },
-            ].map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  whileHover={{
-                    y: -10,
-                    boxShadow: '0 20px 25px -5px rgba(252, 184, 83, 0.3)',
-                  }}
-                  className="bg-gradient-to-br from-primary-light to-primary p-8 rounded-2xl text-center border-2 border-primary shadow-lg"
-                >
-                  <Icon className="text-dark-bg mx-auto mb-4" size={40} aria-hidden="true" />
-                  <p className="text-4xl font-bold text-dark-bg mb-2">{stat.number}</p>
-                  <p className="text-dark-bg font-semibold">{stat.label}</p>
-                </motion.div>
-              );
-            })}
+            ].map((stat, index) => (
+              <StatCard
+                key={index}
+                icon={stat.icon}
+                number={stat.number}
+                label={stat.label}
+              />
+            ))}
           </motion.div>
         </motion.div>
       </section>
@@ -188,26 +189,62 @@ export default function About() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             variants={containerVariants}
           >
-            {[1, 2, 3, 4, 5, 6].map((item) => (
+            {[gallery1, gallery2, gallery3, gallery4, gallery5, gallery6].map((image, index) => (
               <motion.div
-                key={item}
+                key={index}
                 variants={itemVariants}
                 whileHover={{
                   scale: 1.05,
                   boxShadow: '0 20px 25px -5px rgba(252, 184, 83, 0.4)',
                 }}
-                className="aspect-square bg-gradient-to-br from-primary to-primary-dark rounded-2xl flex items-center justify-center cursor-pointer overflow-hidden group border-2 border-primary shadow-lg"
+                className="aspect-square rounded-2xl overflow-hidden group border-2 border-primary shadow-lg cursor-pointer"
+                onClick={() => setSelectedImage(image)}
               >
-                <div className="text-center group-hover:scale-110 transition-transform duration-300">
-                  <p className="text-white text-2xl font-bold mb-2">📸</p>
-                  <p className="text-white text-lg font-semibold">Image {item}</p>
-                  <p className="text-white text-sm mt-2 opacity-80">Coming Soon</p>
-                </div>
+                <img 
+                  src={image} 
+                  alt={`Gallery ${index + 1}`}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
               </motion.div>
             ))}
           </motion.div>
         </motion.div>
       </section>
+
+      {/* Image Lightbox Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+          >
+            <motion.div
+              className="relative max-w-4xl max-h-[90vh] w-full h-full flex items-center justify-center"
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={selectedImage}
+                alt="Expanded gallery"
+                className="w-full h-full object-contain rounded-2xl"
+              />
+              <motion.button
+                className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setSelectedImage(null)}
+              >
+                <X size={24} className="text-dark-bg" />
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Values Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-primary-light to-white">
@@ -218,12 +255,11 @@ export default function About() {
           viewport={{ once: true, amount: 0.2 }}
           variants={containerVariants}
         >
-          <motion.h2
-            className="text-4xl font-bold text-dark-bg text-center mb-16"
-            variants={itemVariants}
-          >
-            Our Core <span className="text-primary-dark">Values</span>
-          </motion.h2>
+          <SectionHeader
+            title="Our Core"
+            highlighted="Values"
+            description=""
+          />
 
           <motion.div
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
@@ -243,19 +279,13 @@ export default function About() {
                 description: 'Building with the community, not for them.',
               },
             ].map((value, index) => (
-              <motion.div
+              <Card
                 key={index}
-                variants={itemVariants}
-                whileHover={{ y: -10 }}
-                className="bg-white p-8 rounded-2xl border-4 border-primary shadow-md hover:shadow-lg transition-all duration-300"
-              >
-                <h3 className="text-2xl font-bold text-primary-dark mb-4">
-                  {value.title}
-                </h3>
-                <p className="text-lg text-dark-bg leading-relaxed">
-                  {value.description}
-                </p>
-              </motion.div>
+                title={value.title}
+                description={value.description}
+                variant="default"
+                hoverEffect={true}
+              />
             ))}
           </motion.div>
         </motion.div>

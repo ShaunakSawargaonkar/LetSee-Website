@@ -1,9 +1,14 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Users, Target, Lightbulb, Shield, Zap, Heart } from 'lucide-react';
 import { containerVariants, itemVariants, floatAnimation, scaleAnimation } from '../hooks/useAnimations';
 import logo from '../assets/logo_color.png';
+import ContactModal from '../components/ContactModal';
 
 export default function Home() {
+  const navigate = useNavigate();
+  const [showContact, setShowContact] = useState(false);
 
   const features = [
     {
@@ -81,6 +86,7 @@ export default function Home() {
                   style={{ backgroundColor: '#F5A623' }}
                   onMouseEnter={(e) => e.target.style.backgroundColor = '#FCB853'}
                   onMouseLeave={(e) => e.target.style.backgroundColor = '#F5A623'}
+                  onClick={() => navigate('/about')}
                   aria-label="Learn more about our app"
                 >
                   Learn More <ArrowRight size={20} />
@@ -312,6 +318,7 @@ export default function Home() {
               onMouseEnter={(e) => e.target.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.3)'}
               onMouseLeave={(e) => e.target.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)'}
               variants={itemVariants}
+              onClick={() => window.open('https://play.google.com/store/apps/details?id=com.letsee.letsee', '_blank')}
               aria-label="Get started with Let's See"
             >
               Get Started Now
@@ -325,6 +332,7 @@ export default function Home() {
               onMouseEnter={(e) => { e.target.style.backgroundColor = '#FFFFFF'; e.target.style.color = '#F5A623'; }}
               onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = '#FFFFFF'; }}
               variants={itemVariants}
+              onClick={() => setShowContact(true)}
               aria-label="Contact us"
             >
               Contact Us
@@ -332,6 +340,8 @@ export default function Home() {
           </motion.div>
         </motion.div>
       </section>
+
+      <ContactModal isOpen={showContact} onClose={() => setShowContact(false)} />
     </main>
   );
 }

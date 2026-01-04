@@ -3,10 +3,15 @@
  * Information about donations and support
  * WCAG 2.1 AA compliant
  */
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Heart, Users, Target, Globe, TrendingUp, Award } from 'lucide-react';
+import ContactModal from '../components/ContactModal';
 
 export default function Donate() {
+  const navigate = useNavigate();
+  const [showContact, setShowContact] = useState(false);
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -267,6 +272,7 @@ export default function Donate() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
                   className="w-full bg-primary-dark text-white font-bold py-3 px-4 rounded-xl hover:bg-primary transition-colors duration-300 focus-visible:outline-offset-2"
+                  
                   aria-label={`Learn more about ${item.title}`}
                 >
                   Learn More
@@ -328,6 +334,7 @@ export default function Donate() {
               whileTap={{ scale: 0.98 }}
               className="bg-transparent border-3 border-white text-white font-bold py-4 px-10 rounded-xl text-lg hover:bg-white hover:text-primary-dark transition-all duration-300"
               variants={itemVariants}
+              onClick={() => setShowContact(true)}
               aria-label="Contact us"
             >
               Contact Us
@@ -335,6 +342,8 @@ export default function Donate() {
           </motion.div>
         </motion.div>
       </section>
+
+      <ContactModal isOpen={showContact} onClose={() => setShowContact(false)} />
     </main>
   );
 }
