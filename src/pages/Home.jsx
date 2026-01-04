@@ -93,6 +93,7 @@ export default function Home() {
                   style={{ borderWidth: '3px', borderColor: '#F5A623', color: '#F5A623' }}
                   onMouseEnter={(e) => e.target.style.backgroundColor = '#FDD89B'}
                   onMouseLeave={(e) => e.target.style.backgroundColor = '#FFFFFF'}
+                  onClick={() => window.open('https://play.google.com/store/apps/details?id=com.letsee.letsee', '_blank')}
                   aria-label="Download the Let's See app"
                 >
                   Download App
