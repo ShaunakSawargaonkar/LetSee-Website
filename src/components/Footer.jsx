@@ -1,32 +1,262 @@
+
+// import { Link } from 'react-router-dom';
+// import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+// import logo from '../assets/logo_color.png';
+
+// export default function Footer() {
+//   const year = new Date().getFullYear();
+  
+//   const socialLinks = [
+//     { label: 'Facebook', icon: Facebook, href: '#' },
+//     { label: 'Twitter', icon: Twitter, href: '#' },
+//     { label: 'LinkedIn', icon: Linkedin, href: '#' },
+//     { label: 'Instagram', icon: Instagram, href: '#' },
+//   ];
+
+//   const quickLinks = [
+//     { to: '/', label: 'Home' },
+//     { to: '/about', label: 'About' },
+//     { to: '/app-showcase', label: 'App' },
+//     { to: '/donate', label: 'Donate' }
+//   ];
+
+//   const legalLinks = [
+//     { to: '/terms', label: 'Terms' },
+//     { href: '#', label: 'Privacy' },
+//     { href: '#', label: 'Contact' }
+//   ];
+
+//   return (
+//     <footer className="bg-dark-bg text-white mt-20 border-t-4 border-primary">
+//       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+//         {/* Main Grid: 1 col on mobile, 2 on tablet, 4 on desktop */}
+//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          
+//           {/* Column 1: Brand Info */}
+//           <div className="space-y-4">
+//             <div className="flex items-center gap-3">
+//               <img 
+//                 src={logo} 
+//                 alt="Let's See Logo" 
+//                 className="w-10 h-10 object-contain" 
+//               />
+//               <h3 className="text-xl font-bold">Let's See</h3>
+//             </div>
+//             <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
+//               Empowering visually impaired with assistive technology.
+//             </p>
+//           </div>
+
+//           {/* Column 2: Quick Links (Vertical) */}
+//           <div>
+//             <h4 className="font-bold text-lg mb-4 text-primary">Links</h4>
+//             <nav className="flex flex-col space-y-2">
+//               {quickLinks.map((link) => (
+//                 <Link 
+//                   key={link.to} 
+//                   to={link.to} 
+//                   className="text-gray-300 hover:text-primary transition-colors text-sm w-fit"
+//                 >
+//                   {link.label}
+//                 </Link>
+//               ))}
+//             </nav>
+//           </div>
+
+//           {/* Column 3: Legal (Vertical) */}
+//           <div>
+//             <h4 className="font-bold text-lg mb-4 text-primary">Legal</h4>
+//             <nav className="flex flex-col space-y-2">
+//               {legalLinks.map((link) => (
+//                 link.to ? (
+//                   <Link 
+//                     key={link.label} 
+//                     to={link.to} 
+//                     className="text-gray-300 hover:text-primary transition-colors text-sm w-fit"
+//                   >
+//                     {link.label}
+//                   </Link>
+//                 ) : (
+//                   <a 
+//                     key={link.label} 
+//                     href={link.href} 
+//                     className="text-gray-300 hover:text-primary transition-colors text-sm w-fit"
+//                   >
+//                     {link.label}
+//                   </a>
+//                 )
+//               ))}
+//             </nav>
+//           </div>
+
+//           {/* Column 4: Social Follow */}
+//           <div>
+//             <h4 className="font-bold text-lg mb-4 text-primary">Follow Us</h4>
+//             <div className="flex gap-4">
+//               {socialLinks.map((link) => {
+//                 const Icon = link.icon;
+//                 return (
+//                   <a 
+//                     key={link.label} 
+//                     href={link.href} 
+//                     className="bg-gray-800 p-2 rounded-full text-gray-300 hover:bg-primary hover:text-white transition-all duration-300" 
+//                     aria-label={link.label}
+//                   >
+//                     <Icon size={20} />
+//                   </a>
+//                 );
+//               })}
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* Bottom Bar */}
+//         <div className="border-t border-gray-800 pt-8">
+//           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+//             <p className="text-gray-500 text-sm text-center md:text-left">
+//               © {year} Let's See. All rights reserved.
+//             </p>
+//             <p className="text-gray-500 text-sm flex items-center gap-1">
+//               Made with <span className="text-primary animate-pulse">♥</span>
+//             </p>
+//           </div>
+//         </div>
+//       </div>
+//     </footer>
+//   );
+// }
 import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import logo from '../assets/logo_color.png';
 
 export default function Footer() {
   const year = new Date().getFullYear();
-  const links = [
+  
+  const socialLinks = [
     { label: 'Facebook', icon: Facebook, href: '#' },
     { label: 'Twitter', icon: Twitter, href: '#' },
     { label: 'LinkedIn', icon: Linkedin, href: '#' },
     { label: 'Instagram', icon: Instagram, href: '#' },
   ];
 
+  const quickLinks = [
+    { to: '/', label: 'Home' },
+    { to: '/about', label: 'About' },
+    { to: '/app-showcase', label: 'App' },
+    { to: '/donate', label: 'Donate' }
+  ];
+
+  const legalLinks = [
+    { to: '/terms', label: 'Terms' },
+    { href: '#', label: 'Privacy' },
+    { href: '#', label: 'Contact' }
+  ];
+
   return (
     <footer className="bg-dark-bg text-white mt-20 border-t-4 border-primary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-          <div>
-            <div className="flex items-center gap-2 mb-4"><span className="text-3xl">👁️</span><h3 className="text-xl font-bold">Let's See</h3></div>
-            <p className="text-gray-300">Empowering visually impaired with assistive technology.</p>
+        
+        {/* GRID UPDATE:
+           - grid-cols-2: Sets a 2-column layout for mobile (instead of 1).
+           - lg:grid-cols-4: Keeps the 4-column layout for desktop.
+        */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          
+          {/* BRANDING SECTION */}
+          {/* col-span-2: Spans full width on mobile so the logo text isn't squashed */}
+          {/* lg:col-span-1: Returns to 1 column width on desktop */}
+          <div className="col-span-2 lg:col-span-1 space-y-4">
+            <div className="flex items-center gap-3">
+              <img 
+                src={logo} 
+                alt="Let's See Logo" 
+                className="w-10 h-10 object-contain" 
+              />
+              <h3 className="text-xl font-bold">Let's See</h3>
+            </div>
+            <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
+              Empowering visually impaired with assistive technology.
+            </p>
           </div>
-          <nav aria-label="Quick links"><h4 className="font-bold text-lg mb-4 text-primary">Links</h4><ul className="space-y-2 list-none p-0 m-0">
-            {[{to:'/',label:'Home'},{to:'/about',label:'About'},{to:'/app-showcase',label:'App'},{to:'/donate',label:'Donate'}].map(l=><li key={l.to}><Link to={l.to} className="text-gray-300 hover:text-primary transition-colors">{l.label}</Link></li>)}
-          </ul></nav>
-          <nav aria-label="Legal"><h4 className="font-bold text-lg mb-4 text-primary">Legal</h4><ul className="space-y-2 list-none p-0 m-0">
-            {[{to:'/terms',label:'Terms'},{href:'#',label:'Privacy'},{href:'#',label:'Contact'}].map(l=>(l.to ? <li key={l.label}><Link to={l.to} className="text-gray-300 hover:text-primary transition-colors">{l.label}</Link></li>:<li key={l.label}><a href={l.href} className="text-gray-300 hover:text-primary transition-colors">{l.label}</a></li>))}
-          </ul></nav>
-          <div><h4 className="font-bold text-lg mb-4 text-primary">Follow</h4><div className="flex gap-4">{links.map(l=>{const Icon=l.icon;return <a key={l.label} href={l.href} className="text-gray-300 hover:text-primary" aria-label={l.label}><Icon size={24}/></a>})}</div></div>
+
+          {/* LINKS SECTION */}
+          {/* Takes up 1 column naturally, sitting on the Left side in mobile view */}
+          <div>
+            <h4 className="font-bold text-lg mb-4 text-primary">Links</h4>
+            <nav className="flex flex-col space-y-2">
+              {quickLinks.map((link) => (
+                <Link 
+                  key={link.to} 
+                  to={link.to} 
+                  className="text-gray-300 hover:text-primary transition-colors text-sm w-fit"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* LEGAL SECTION */}
+          {/* Takes up 1 column naturally, sitting on the Right side in mobile view */}
+          <div>
+            <h4 className="font-bold text-lg mb-4 text-primary">Legal</h4>
+            <nav className="flex flex-col space-y-2">
+              {legalLinks.map((link) => (
+                link.to ? (
+                  <Link 
+                    key={link.label} 
+                    to={link.to} 
+                    className="text-gray-300 hover:text-primary transition-colors text-sm w-fit"
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a 
+                    key={link.label} 
+                    href={link.href} 
+                    className="text-gray-300 hover:text-primary transition-colors text-sm w-fit"
+                  >
+                    {link.label}
+                  </a>
+                )
+              ))}
+            </nav>
+          </div>
+
+          {/* FOLLOW US SECTION */}
+          {/* col-span-2: Spans full width on mobile for easier tapping */}
+          {/* lg:col-span-1: Returns to 1 column width on desktop */}
+          <div className="col-span-2 lg:col-span-1">
+            <h4 className="font-bold text-lg mb-4 text-primary">Follow Us</h4>
+            <div className="flex gap-4">
+              {socialLinks.map((link) => {
+                const Icon = link.icon;
+                return (
+                  <a 
+                    key={link.label} 
+                    href={link.href} 
+                    className="bg-gray-800 p-2 rounded-full text-gray-300 hover:bg-primary hover:text-white transition-all duration-300" 
+                    aria-label={link.label}
+                  >
+                    <Icon size={20} />
+                  </a>
+                );
+              })}
+            </div>
+          </div>
         </div>
-        <div className="border-t border-gray-700 pt-8"><div className="flex flex-col md:flex-row justify-between items-center gap-4"><p className="text-gray-400 text-sm">© {year} Let's See. All rights reserved. Made with <span className="text-primary">♥</span></p></div></div>
+
+        <div className="border-t border-gray-800 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-500 text-sm text-center md:text-left">
+              © {year} Let's See. All rights reserved.
+            </p>
+            <p className="text-gray-500 text-sm flex items-center gap-1">
+              Made with <span className="text-primary animate-pulse">♥</span>
+            </p>
+          </div>
+        </div>
       </div>
     </footer>
   );
