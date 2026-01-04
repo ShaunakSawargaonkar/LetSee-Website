@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+/* Global body and text defaults */
+body {
+  background-color: #F8F8F8;
+  color: #1A1A1A;
+}
+
+main {
+  color: #1A1A1A;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #1A1A1A;
+  font-weight: 700;
+}
+
+p {
+  color: #1A1A1A;
+}
+
+/* Focus visible for keyboard navigation accessibility */
+*:focus-visible {
+  outline: 4px solid #FCB853;
+  outline-offset: 8px;
+}
+
+/* Skip to main content link for accessibility */
+.skip-to-main {
+  position: absolute;
+  top: -160px;
+  left: 0;
+  background-color: #FCB853;
+  color: #1A1A1A;
+  padding: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 100;
+}
+
+.skip-to-main:focus {
+  position: static;
+}
+
