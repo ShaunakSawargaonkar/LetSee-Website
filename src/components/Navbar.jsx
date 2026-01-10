@@ -10,7 +10,6 @@ export default function Navbar() {
     { to: '/', label: 'Home' },
     { to: '/about', label: 'About' },
     { to: '/app-showcase', label: 'App' },
-    { to: '/donate', label: 'Donate' },
   ];
 
   const handleKeyDown = (e) => { if (e.key === 'Escape') setIsOpen(false); };
@@ -21,9 +20,9 @@ export default function Navbar() {
       <header className="sticky top-0 z-50 w-full shadow-lg" style={{ backgroundColor: '#1A1A1A', borderBottom: '3px solid #FCB853' }}>
         <nav className="w-full px-4 sm:px-6 lg:px-8 py-4" aria-label="Main" onKeyDown={handleKeyDown}>
           <div className="flex justify-between items-center w-full">
-            <Link to="/" className="flex items-center gap-3 hover:opacity-80 focus-visible:outline-offset-2 rounded-lg flex-shrink-0" aria-label="Let's See">
-              <img src={logo} alt="Let's See Logo" className="w-12 h-12 object-contain flex-shrink-0" />
-              <div><span className="text-xl md:text-2xl font-bold text-white whitespace-nowrap">Let's See</span></div>
+            <Link to="/" className="flex items-center gap-3 hover:opacity-80 focus-visible:outline-offset-2 rounded-lg flex-shrink-0" aria-label="Letsee">
+              <img src={logo} alt="Letsee Logo" className="w-12 h-12 object-contain flex-shrink-0" />
+              <div><span className="text-xl md:text-2xl font-bold text-white whitespace-nowrap">Letsee</span></div>
             </Link>
             <ul className="hidden md:flex gap-2 list-none m-0 p-0">
               {navLinks.map(link => (

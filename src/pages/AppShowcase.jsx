@@ -1,15 +1,147 @@
-import { motion } from 'framer-motion';
-import { Smartphone, Eye, Zap, Shield, Radio, Volume2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { 
+  Smartphone, 
+  MessageCircle, 
+  FileText, 
+  Zap, 
+  Vibrate, 
+  Shield, 
+  Radio, 
+  Share2, 
+  Search, 
+  Video, 
+  Sparkles,
+  Accessibility
+} from 'lucide-react';
 import { containerVariants, itemVariants } from '../hooks/useAnimations';
+import appImage1 from '../assets/app_image1.jpeg';
+import appImage2 from '../assets/app_image2.jpeg';
+import appImage3 from '../assets/app_image3.jpeg';
+import appImage4 from '../assets/app_image4.jpeg';
 
 export default function AppShowcase() {
+  const appImages = [appImage1, appImage2, appImage3, appImage4];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [featuresInView, setFeaturesInView] = useState(false);
+  const featuresRef = useRef(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % appImages.length);
+    }, 4000); // Change image every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [appImages.length]);
+
+  // Ensure features section animates even if already in view on load
+  useEffect(() => {
+    const checkInView = () => {
+      if (featuresRef.current) {
+        const rect = featuresRef.current.getBoundingClientRect();
+        const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+        if (isInView && !featuresInView) {
+          setFeaturesInView(true);
+        }
+      }
+    };
+
+    // Check immediately and after a short delay
+    checkInView();
+    const timeout = setTimeout(checkInView, 100);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setFeaturesInView(true);
+          }
+        });
+      },
+      { threshold: 0 }
+    );
+
+    if (featuresRef.current) {
+      observer.observe(featuresRef.current);
+    }
+
+    return () => {
+      clearTimeout(timeout);
+      observer.disconnect();
+    };
+  }, [featuresInView]);
   const features = [
-    { icon: Eye, title: 'Visual Recognition', description: 'AI-powered image recognition in real-time.', color: 'from-blue-400 to-blue-600' },
-    { icon: Smartphone, title: 'Intuitive Interface', description: 'Voice-guided navigation with haptic feedback.', color: 'from-purple-400 to-purple-600' },
-    { icon: Zap, title: 'Fast & Responsive', description: 'Lightning-fast processing for real-time feedback.', color: 'from-yellow-400 to-yellow-600' },
-    { icon: Shield, title: 'Privacy First', description: 'Encrypted and secure data protection.', color: 'from-green-400 to-green-600' },
-    { icon: Volume2, title: 'Voice Control', description: 'Complete hands-free operation.', color: 'from-pink-400 to-pink-600' },
-    { icon: Radio, title: 'Offline Support', description: 'Core features work without internet.', color: 'from-indigo-400 to-indigo-600' },
+    { 
+      icon: MessageCircle, 
+      title: 'Visual Q&A', 
+      description: 'Ask any question about your surroundings with real-time AI-powered answers. Get instant insights about what you see.', 
+      color: 'from-blue-400 to-blue-600' 
+    },
+    { 
+      icon: FileText, 
+      title: 'Text-to-Speech', 
+      description: 'Read text out loud from any image, even translated to your native language. Perfect for documents, signs, and messages.', 
+      color: 'from-purple-400 to-purple-600' 
+    },
+    { 
+      icon: Search, 
+      title: 'Smart Assistant', 
+      description: 'Capability to perform web searches and respond to user queries. Get answers to any question, anytime.', 
+      color: 'from-cyan-400 to-cyan-600' 
+    },
+    { 
+      icon: Video, 
+      title: 'Live Video Analysis', 
+      description: 'Ask questions about your surroundings based on live video input. Real-time visual understanding through your camera.', 
+      color: 'from-red-400 to-red-600' 
+    },
+    { 
+      icon: Share2, 
+      title: 'Share & Ask', 
+      description: 'Have questions about what you see on your phone or any image you receive on WhatsApp? Just share it to the app and ask.', 
+      color: 'from-teal-400 to-teal-600' 
+    },
+    { 
+      icon: Accessibility, 
+      title: 'Blind-First Design', 
+      description: 'Simple layout with intuitive TalkBack responses and adjustable speech rate. Every design decision prioritizes the blind and visually impaired community.', 
+      color: 'from-emerald-400 to-emerald-600' 
+    },
+    { 
+      icon: Radio, 
+      title: 'Voice-Based Interaction',
+      description: 'Ask questions and get answers with voice input and output.', 
+      color: 'from-orange-400 to-orange-600' 
+    },
+    { 
+      icon: Smartphone, 
+      title: 'Intuitive Interface', 
+      description: 'Voice-guided navigation with haptic feedback. Quick access buttons for the most useful cases make everyday tasks effortless.', 
+      color: 'from-indigo-400 to-indigo-600' 
+    },
+    { 
+      icon: Zap, 
+      title: 'Lightning Fast', 
+      description: 'Lightning-fast processing for real-time feedback. Experience seamless performance with instant results.', 
+      color: 'from-yellow-400 to-yellow-600' 
+    },
+    { 
+      icon: Vibrate, 
+      title: 'Haptic and Voice Feedback', 
+      description: 'Haptic and voice feedback on image capture, voice input, and output. Designed to be highly intuitive for blind users.', 
+      color: 'from-pink-400 to-pink-600' 
+    },
+    { 
+      icon: Shield, 
+      title: 'Complete Privacy', 
+      description: 'No data is saved on our servers. Everything is processed client-side, ensuring your privacy and security.', 
+      color: 'from-green-400 to-green-600' 
+    },
+    { 
+      icon: Sparkles, 
+      title: 'And Many More', 
+      description: 'We\'re constantly adding new features and improvements. Stay tuned for exciting upcoming capabilities.', 
+      color: 'from-violet-400 to-violet-600' 
+    },
   ];
 
   return (
@@ -19,7 +151,7 @@ export default function AppShowcase() {
           <Smartphone size={400} className="absolute -top-24 -right-24 text-primary" />
         </motion.div>
         <motion.div className="max-w-4xl mx-auto relative z-10" initial="hidden" animate="visible" variants={containerVariants}>
-          <motion.h1 className="text-5xl md:text-6xl font-bold text-white mb-4" variants={itemVariants}>Let's See App</motion.h1>
+          <motion.h1 className="text-5xl md:text-6xl font-bold text-white mb-4" variants={itemVariants}>Letsee App</motion.h1>
           <motion.p className="text-2xl text-white opacity-90" variants={itemVariants}>Revolutionary assistive technology for the visually impaired</motion.p>
         </motion.div>
       </section>
@@ -27,10 +159,12 @@ export default function AppShowcase() {
       {/* Features Grid */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <motion.div
+          ref={featuresRef}
           className="max-w-7xl mx-auto"
           initial="hidden"
+          animate={featuresInView ? "visible" : "hidden"}
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0 }}
           variants={containerVariants}
         >
           <motion.h2
@@ -106,26 +240,61 @@ export default function AppShowcase() {
             className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
             variants={containerVariants}
           >
-            {/* Mockup */}
+            {/* Image Carousel */}
             <motion.div
               variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              className="bg-gradient-to-br from-primary to-primary-dark rounded-3xl p-8 flex items-center justify-center min-h-96 shadow-2xl"
+              className="relative w-full max-w-xs mx-auto"
             >
-              <motion.div
-                className="text-center"
-                animate={{
-                  y: [0, -10, 0],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                }}
-              >
-                <Smartphone size={80} className="text-white mx-auto mb-4" />
-                <p className="text-white text-2xl font-semibold mb-2">App Mockup</p>
-                <p className="text-white opacity-80">Interactive Demo Available Soon</p>
-              </motion.div>
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl" style={{ 
+                backgroundColor: '#1A1A1A',
+                padding: '0.75rem',
+                borderRadius: '2rem',
+                minHeight: '500px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div className="relative w-full rounded-2xl overflow-hidden" style={{ 
+                  maxHeight: '600px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={currentImageIndex}
+                      src={appImages[currentImageIndex]}
+                      alt={`App interface screenshot ${currentImageIndex + 1}`}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 1.05 }}
+                      transition={{ duration: 0.5, ease: 'easeInOut' }}
+                      style={{
+                        maxWidth: '100%',
+                        height: 'auto',
+                        objectFit: 'contain',
+                        display: 'block'
+                      }}
+                    />
+                  </AnimatePresence>
+                </div>
+                
+                {/* Navigation Dots */}
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+                  {appImages.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentImageIndex(index)}
+                      className={`transition-all duration-300 rounded-full ${
+                        index === currentImageIndex
+                          ? 'w-3 h-3 bg-white'
+                          : 'w-2 h-2 bg-white opacity-50 hover:opacity-75'
+                      }`}
+                      aria-label={`Go to screenshot ${index + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
             </motion.div>
 
             {/* Description */}
@@ -139,12 +308,11 @@ export default function AppShowcase() {
 
               <motion.ul className="space-y-4" variants={containerVariants}>
                 {[
+                  'Advance AI Features',
                   'Voice-first interaction model',
                   'Haptic feedback for confirmation',
                   'High contrast visual elements',
                   'Fully screen reader compatible',
-                  'Offline functionality support',
-                  'Customizable font sizes & colors',
                 ].map((item, index) => (
                   <motion.li
                     key={index}
@@ -157,15 +325,38 @@ export default function AppShowcase() {
                 ))}
               </motion.ul>
 
-              <motion.button
+              <motion.a
+                href="https://play.google.com/store/apps/details?id=com.letsee.letsee"
+                target="_blank"
+                rel="noopener noreferrer"
                 variants={itemVariants}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
-                className="mt-8 bg-primary-dark text-white font-bold py-4 px-8 rounded-xl hover:bg-primary transition-all duration-300 text-lg shadow-lg focus-visible:outline-offset-2"
-                aria-label="Download the app"
+                style={{
+                  marginTop: '2rem',
+                  backgroundColor: '#F5A623',
+                  color: '#1A1A1A',
+                  fontWeight: 'bold',
+                  padding: '1rem 2rem',
+                  borderRadius: '0.75rem',
+                  fontSize: '1.125rem',
+                  boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  display: 'inline-block',
+                  textDecoration: 'none'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = '#FCB853';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = '#F5A623';
+                }}
+                aria-label="Download the app from Google Play Store"
               >
                 Download Now
-              </motion.button>
+              </motion.a>
             </motion.div>
           </motion.div>
         </motion.div>
@@ -207,10 +398,9 @@ export default function AppShowcase() {
               </h3>
               <ul className="space-y-4">
                 {[
-                  { tech: 'TensorFlow Lite', desc: 'On-device ML models' },
-                  { tech: 'React Native', desc: 'Cross-platform app' },
-                  { tech: 'Web Speech API', desc: 'Voice interaction' },
-                  { tech: 'Cloud Vision', desc: 'Advanced image analysis' },
+                  { tech: 'Google ADK', desc: 'AI-powered Assistant' },
+                  { tech: 'Flutter SDK', desc: 'Cross-platform app' },
+                  { tech: 'Web TTS APIs', desc: 'Text-to-Speech' },
                 ].map((item, index) => (
                   <motion.li
                     key={index}
