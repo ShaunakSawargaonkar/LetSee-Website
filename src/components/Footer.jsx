@@ -15,8 +15,7 @@ export default function Footer() {
   const quickLinks = [
     { to: '/', label: 'Home' },
     { to: '/about', label: 'About' },
-    { to: '/app-showcase', label: 'App' },
-    { to: '/donate', label: 'Donate' }
+    { to: '/app-showcase', label: 'App' }
   ];
 
   const legalLinks = [
@@ -42,12 +41,12 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               <img 
                 src={logo} 
-                alt="Let's See Logo" 
+                alt="Letsee Logo" 
                 className="w-10 h-10 object-contain" 
               />
-              <h3 className="text-xl font-bold">Let's See</h3>
+              <h3 className="text-xl font-bold">Letsee</h3>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
+            <p className="text-gray-200 text-sm leading-relaxed max-w-xs">
               Empowering visually impaired with assistive technology.
             </p>
           </div>
@@ -61,7 +60,7 @@ export default function Footer() {
                 <Link 
                   key={link.to} 
                   to={link.to} 
-                  className="text-gray-300 hover:text-primary transition-colors text-sm w-fit"
+                  className="text-gray-700 hover:text-primary transition-colors text-sm w-fit"
                 >
                   {link.label}
                 </Link>
@@ -79,7 +78,7 @@ export default function Footer() {
                   <Link 
                     key={link.label} 
                     to={link.to} 
-                    className="text-gray-300 hover:text-primary transition-colors text-sm w-fit"
+                    className="text-gray-700 hover:text-primary transition-colors text-sm w-fit"
                   >
                     {link.label}
                   </Link>
@@ -87,7 +86,7 @@ export default function Footer() {
                   <a 
                     key={link.label} 
                     href={link.href} 
-                    className="text-gray-300 hover:text-primary transition-colors text-sm w-fit"
+                    className="text-gray-700 hover:text-primary transition-colors text-sm w-fit"
                   >
                     {link.label}
                   </a>
@@ -108,7 +107,7 @@ export default function Footer() {
                   <a 
                     key={link.label} 
                     href={link.href} 
-                    className="bg-gray-800 p-2 rounded-full text-gray-300 hover:bg-primary hover:text-white transition-all duration-300" 
+                    className="bg-gray-700 p-2 rounded-full text-white hover:bg-primary hover:text-white transition-all duration-300" 
                     aria-label={link.label}
                   >
                     <Icon size={20} />
@@ -121,10 +120,10 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-500 text-sm text-center md:text-left">
-              © {year} Let's See. All rights reserved.
+            <p className="text-gray-700 text-sm text-center md:text-left">
+              © {year} Letsee. All rights reserved.
             </p>
-            <p className="text-gray-500 text-sm flex items-center gap-1">
+            <p className="text-gray-300 text-sm flex items-center gap-1">
               Made with <span className="text-primary animate-pulse">♥</span>
             </p>
           </div>

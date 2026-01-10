@@ -1,10 +1,10 @@
-# Let's See - Assistive Technology Website
+# Letsee - Assistive Technology Website
 
-A production-ready, WCAG 2.1 AA compliant website for "Let's See" - an innovative assistive technology company dedicated to empowering the visually impaired.
+A production-ready, WCAG 2.1 AA compliant website for "Letsee" - an innovative assistive technology company dedicated to empowering the visually impaired.
 
 ## 🎯 Project Overview
 
-This website serves as the digital presence for Let's See, showcasing the company's mission, flagship app, and donation opportunities. Built with modern web technologies and accessibility as the highest priority.
+This website serves as the digital presence for Letsee, showcasing the company's mission, flagship app, and donation opportunities. Built with modern web technologies and accessibility as the highest priority.
 
 ## 🛠️ Tech Stack
 

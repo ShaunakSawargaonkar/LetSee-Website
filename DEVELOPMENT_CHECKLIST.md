@@ -1,4 +1,4 @@
-# Let's See - Development Checklist & Roadmap
+# Letsee - Development Checklist & Roadmap
 
 ## ✅ Project Foundation (COMPLETED)
 
